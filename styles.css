@@ -11,6 +11,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    padding: 20px 0; /* Increase padding for taller header */
 }
 
 .container {
@@ -24,8 +25,8 @@ header {
     background-color: rgb(29, 29, 29); /* Menu background */
     color: white; /* Icon color */
     border: none;
-    padding: 10px 20px; /* Padding around the hamburger icon */
-    font-size: 40px; /* Icon size */
+    padding: 15px 20px; /* Padding around the hamburger icon */
+    font-size: 30px; /* Icon size */
     cursor: pointer;
     position: fixed; /* Keeps the button in a specific position */
     top: 0;
@@ -112,18 +113,6 @@ th {
 @media (max-width: 768px) {
     .menu-toggle {
         display: block; /* Show toggle button on mobile */
-        background-color: rgb(29, 29, 29);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 20px;
-        cursor: pointer;
-        position: fixed;
-        top: 0;
-        right: 0;
-        z-index: 2000;
-        width: 100%; /* Full width */
-        text-align: right;
     }
 
     nav ul {
