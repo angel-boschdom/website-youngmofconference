@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Early Career Researchers in Metal-organic frameworks Meeting</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Simple JavaScript function to toggle the menu in mobile view
+        function toggleMenu() {
+            var menu = document.getElementById("mobileMenu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+        // Ensure menu visibility is reset when resizing from mobile to desktop view
+        window.addEventListener('resize', function() {
+            var menu = document.getElementById("mobileMenu");
+            if (window.innerWidth > 768) {
+                menu.style.display = "flex"; // Ensure the menu is visible and using flex layout
+            } 
+        });
+    </script>
 </head>
 <body>
     <header>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button><!-- Toggle button for mobile menu -->
         <nav>
-            <ul>
+            <ul id="mobileMenu"> <!-- Added an ID to target with JavaScript -->
                 <li><a href="#">About</a></li>
                 <li><a href="#">Abstract Submission</a></li>
                 <li><a href="#">Scientific Programme</a></li>

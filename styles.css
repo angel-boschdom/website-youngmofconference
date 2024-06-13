@@ -6,15 +6,36 @@ body {
 
 header {
     background-color: rgb(29, 29, 29);
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-toggle {
+    display: none; /* Hide toggle button by default */
+    background-color: rgb(29, 29, 29); /* Menu background */
+    color: white; /* Icon color */
+    border: none;
+    padding: 10px 20px; /* Padding around the hamburger icon */
+    font-size: 20px; /* Icon size */
+    cursor: pointer;
+    position: fixed; /* Keeps the button in a specific position */
+    top: 0;
+    right: 0;
+    z-index: 2000; /* Ensures the button is above other content */
+    width: 100%; /* Makes the button span the entire screen width */
+    text-align: right; /* Keeps the icon text aligned to the right */
 }
 
 nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex;
+    display: flex; /* Ensure the menu is always flex-displayed on larger screens */
     justify-content: center;
     flex-wrap: wrap;
+    width: 100%; /* Full width */
 }
 
 nav ul li {
@@ -80,12 +101,36 @@ th {
     padding: 40px 20px;
 }
 
+/* Styles specific to mobile screens */
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
+    .menu-toggle {
+        display: block; /* Show toggle button on mobile */
+        background-color: rgb(29, 29, 29);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 20px;
+        cursor: pointer;
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 2000;
+        width: 100%; /* Full width */
+        text-align: right;
     }
 
-    table {
-        width: 100%;
+    nav ul {
+        display: none; /* Initially hide the menu on mobile */
+        flex-direction: column;
+        position: absolute;
+        background-color: rgb(29, 29, 29);
+        width: 100%; /* Full width */
+        top: 40px; /* Adjust top position to not overlap with the menu button */
+        left: 0;
+        z-index: 1001;
+    }
+
+    nav ul li a {
+        padding: 10px; /* Adjust padding for mobile view */
     }
 }
