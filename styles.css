@@ -121,9 +121,13 @@ th {
         position: absolute;
         background-color: rgb(29, 29, 29);
         width: 100%; /* Full width */
-        top: 40px; /* Adjust top position to not overlap with the menu button */
+        top: 60px; /* Adjust top position to not overlap with the menu button */
         left: 0;
         z-index: 1001;
+    }
+
+    nav ul li {
+        text-align: center; /* Center align menu items */
     }
 
     nav ul li a {
