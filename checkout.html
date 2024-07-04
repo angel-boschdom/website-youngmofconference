@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylescheckout.css">
+    <script>
+        // Simple JavaScript function to toggle the menu in mobile view
+        function toggleMenu() {
+            var menu = document.getElementById("mobileMenu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+        // Ensure menu visibility is reset when resizing from mobile to desktop view
+        window.addEventListener('resize', function() {
+            var menu = document.getElementById("mobileMenu");
+            if (window.innerWidth > 768) {
+                menu.style.display = "flex"; // Ensure the menu is visible and using flex layout
+            } 
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button><!-- Toggle button for mobile menu -->
+        <nav>
+            <ul id="mobileMenu"> <!-- Added an ID to target with JavaScript -->
+                <li><a href="./index.html">About</a></li>
+                <li><a href="#">Abstract Submission</a></li>
+                <li><a href="#">Scientific Programme</a></li>
+                <li><a href="#">Venue</a></li>
+                <li><a href="#">Accommodation</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="./checkout.html">Registration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Registration</h1>
+        <form id="checkoutForm">
+            <fieldset>
+                <legend>Select your type of ticket:</legend>
+                <label>
+                    <input type="radio" name="ticketType" value="100" required>
+                    Student - 100 £
+                </label><br>
+                <label>
+                    <input type="radio" name="ticketType" value="120">
+                    Postdoc - 120 £
+                </label><br>
+                <label>
+                    <input type="radio" name="ticketType" value="140">
+                    Industry - 140 £
+                </label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Additional Options:</legend>
+                <label>
+                    <input type="checkbox" id="galaDinner" value="60">
+                    Attend Gala Dinner - 60 £
+                </label>
+            </fieldset>
+
+            <div class="total-amount">
+                Total Amount: <span id="totalAmount">0</span> £
+            </div>
+
+            <button type="button" class="pay-button" id="payButton" onclick="pay()">Checkout</button>
+        </form>
+    </div>
+
+    <script>
+        const checkoutForm = document.getElementById('checkoutForm');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const galaDinnerCheckbox = document.getElementById('galaDinner');
+
+        checkoutForm.addEventListener('change', updateTotalAmount);
+
+        function updateTotalAmount() {
+            let totalAmount = 0;
+            const selectedTicket = document.querySelector('input[name="ticketType"]:checked');
+            if (selectedTicket) {
+                totalAmount += parseFloat(selectedTicket.value);
+            }
+            if (galaDinnerCheckbox.checked) {
+                totalAmount += parseFloat(galaDinnerCheckbox.value);
+            }
+            totalAmountEl.textContent = totalAmount.toFixed(2);
+        }
+
+        function pay() {
+            const selectedTicket = document.querySelector('input[name="ticketType"]:checked');
+            if (!selectedTicket) {
+                alert('Please select a ticket type.');
+                return;
+            }
+
+            const galaDinner = galaDinnerCheckbox.checked;
+            const ticketType = selectedTicket.value;
+            let callbackUrl = '';
+
+            if (ticketType == '100') {
+                callbackUrl = galaDinner ? 'https://buy.stripe.com/test_9AQ8yWcuJdVC5j28wx' : 'https://buy.stripe.com/test_fZeeXkgKZbNucLucMO';
+            } else if (ticketType == '120') {
+                callbackUrl = galaDinner ? 'https://buy.stripe.com/test_00g3eCbqF7xefXG9AD' : 'https://buy.stripe.com/test_eVa5mKcuJeZG3aU5ko';
+            } else if (ticketType == '140') {
+                callbackUrl = galaDinner ? 'URL_IndustryGala' : 'URL_Industry';
+            }
+
+            window.location.href = callbackUrl;
+        }
+    </script>
+</body>
+</html>
